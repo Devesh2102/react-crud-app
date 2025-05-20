@@ -3,7 +3,8 @@ import {getPost } from "../api/PostApi";
 import { deletePost } from "../api/PostApi";
 import {useState} from "react";
 import "../App.css" 
-
+import "../stylesheets/Loader.css"
+import Form from "./Form"
 const Posts = () => {
 
   const [data, setData] = useState([]);
@@ -22,7 +23,6 @@ const Posts = () => {
   }
 
   const handlerDeletePost = async (id)=>{
-    setLoading(true);
     try{
       const res = await deletePost(id);
       if(res.status === 200){
@@ -35,41 +35,47 @@ const Posts = () => {
     catch (error){
       console.log("failed to delete the post", error);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
     getPostData();
   }, []); 
 
-    return <section className = "section-post">
-    {
-      loading ? (
-      <div class="loader">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-      ) : 
-      data.map((currentElement) => {
-        const {id, title, body} = currentElement;
-        return(
-          <div key={id} className="post-card">
-            <h3>{id}. {title}</h3>
-            <p>{body}</p>
-            <div className="post-actions">
-              <button className="btn-edit">Edit</button>
-              <button className="btn-delete" onClick={()=> handlerDeletePost(id)}>Delete</button>
-            </div>
+  return(
+    <>
+      <section className="section-form">
+        <Form data={data} setData={setData}/>
+      </section>
+      <section className = "section-post">
+        {
+          loading ? (
+          <div className="loader">
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
           </div>
-        )
-      })
-    }
-    </section>
+          ) : 
+          data.map((currentElement) => {
+            const {id, title, body} = currentElement;
+            return(
+              <div key={id} className="post-card">
+                <h3>{id}. {title}</h3>
+                <p>{body}</p>
+                <div className="post-actions">
+                  <button className="btn-edit">Edit</button>
+                  <button className="btn-delete" onClick={()=> handlerDeletePost(id)}>Delete</button>
+                </div>
+              </div>
+            )
+          })
+        }
+      </section>
+    </>
+  );
 }
 
 export default Posts

@@ -35,7 +35,9 @@
 }
 
 .btn-edit,
-.btn-delete {
+.btn-delete,
+.btn-add
+{
   padding: 8px 14px;
   margin-right: 10px;
   border: none;
@@ -44,7 +46,7 @@
   cursor: pointer;
 }
 
-.btn-edit {
+.btn-edit, .btn-add {
   background-color: #007bff;
   color: white;
 }
@@ -54,40 +56,21 @@
   color: white;
 }
 
+.section-form{
+  padding: 1.5rem;
+  border-radius: 0.6rem;
+  margin-left: 6.2rem ;
+}
 
-
-.loader {
+form{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 5px;
+  gap: 2.5rem;
 }
 
-
-.bar {
-  width: 10px;
-  height: 20px;
-  background-color: #3498db;
-  border-radius: 5px;
-  animation: centerGrow 1s infinite ease-in-out;
-  transform-origin: center;
+& input{
+  width: 24rem;
+  border: 0.1rem solid gray;
+  outline: none;
+  border-radius: 0.3rem;
+  padding: 0.8rem 1.2rem;
 }
-
-.bar:nth-child(1) { animation-delay: 0s; }
-.bar:nth-child(2) { animation-delay: 0.1s; }
-.bar:nth-child(3) { animation-delay: 0.2s; }
-.bar:nth-child(4) { animation-delay: 0.3s; }
-.bar:nth-child(5) { animation-delay: 0.4s; }
-.bar:nth-child(6) { animation-delay: 0.5s; }
-.bar:nth-child(7) { animation-delay: 0.6s; }
-
-@keyframes centerGrow {
-  0%, 100% {
-    height: 20px;
-  }
-  50% {
-    height: 60px;
-  }
-}
-
